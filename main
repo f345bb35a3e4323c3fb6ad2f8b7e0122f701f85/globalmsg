@@ -242,7 +242,6 @@ function Library:AddToolTip(InfoStr, HoverInstance)
         Size = UDim2.fromOffset(X, Y);
         TextSize = 14;
         Text = InfoStr,
-        RichText = true,
         TextColor3 = Library.FontColor,
         TextXAlignment = Enum.TextXAlignment.Left;
         ZIndex = Tooltip.ZIndex + 1,
@@ -1034,7 +1033,6 @@ local function CreateRGBSlider(Name, YPos, ColorChannel)
         Size = UDim2.new(0, 15, 0, 15);
         Text = Name;
         TextSize = 12;
-        RichText = true;
         ZIndex = 19;
         Parent = SliderContainer;
     });
@@ -1079,7 +1077,6 @@ local function CreateRGBSlider(Name, YPos, ColorChannel)
         Size = UDim2.new(0, 25, 0, 15);
         Text = '255';
         TextSize = 12;
-        RichText = true;
         ZIndex = 19;
         Parent = SliderContainer;
     });
@@ -1165,7 +1162,6 @@ CreateRGBSlider('B', 40, 'B');
             TextSize = 14;
             Text = ColorPicker.Title,--Info.Default;
             TextWrapped = false;
-            RichText = true;
             ZIndex = 16;
             Parent = PickerFrameInner;
         });
@@ -1337,7 +1333,6 @@ Library:OnHighlight(PlusClickFrame, PlusButton,
                     Size = UDim2.new(1, 0, 0, 15);
                     TextSize = 13;
                     Text = Str;
-                    RichText = true;
                     ZIndex = 16;
                     Parent = self.Inner;
                     TextXAlignment = Enum.TextXAlignment.Left,
@@ -1642,7 +1637,6 @@ Library:Create(DisplayInner, {
             Size = UDim2.new(1, 0, 1, 0);
             TextSize = 13;
             Text = Info.Default;
-            RichText = true;
             TextWrapped = true;
             ZIndex = 8;
             Parent = PickInner;
@@ -1961,7 +1955,6 @@ do
             Size = UDim2.new(1, -4, 0, 15);
             TextSize = 14;
             Text = Text;
-            RichText = true;
             TextWrapped = DoesWrap or false,
             TextXAlignment = Enum.TextXAlignment.Left;
             ZIndex = 5;
@@ -2048,7 +2041,6 @@ do
             local Label = Library:CreateLabel({
                 Size = UDim2.new(1, 0, 1, 0);
                 TextSize = 14;
-                RichText = true;
                 Text = Button.Text;
                 ZIndex = 6;
                 Parent = Inner;
@@ -4265,6 +4257,7 @@ function Library:Notify(Text, Time)
         Position = UDim2.new(0, 4, 0, 0);
         Size = UDim2.new(1, -4, 1, 0);
         Text = Text;
+        RichText = true;
         TextXAlignment = Enum.TextXAlignment.Left;
         TextSize = 14;
         ZIndex = 103;
@@ -4822,7 +4815,6 @@ local GroupboxLabel = Library:CreateLabel({
     Position = UDim2.new(0, 0, 0, 2);
     TextSize = 14;
     Text = Info.Name;
-    RichText = true;
     TextXAlignment = Enum.TextXAlignment.Center;
     ZIndex = 5;
     Parent = BoxInner;
@@ -4958,7 +4950,6 @@ Library:AddToRegistry(Button, {
                     Size = UDim2.new(1, 0, 1, 0);
                     TextSize = 14;
                     Text = Name;
-                    RichText = true;
                     TextXAlignment = Enum.TextXAlignment.Center;
                     ZIndex = 7;
                     Parent = Button;
