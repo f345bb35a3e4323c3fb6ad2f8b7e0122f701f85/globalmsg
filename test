@@ -50,7 +50,15 @@ local url = "https://raw.githubusercontent.com/f345bb35a3e4323c3fb6ad2f8b7e0122f
          local callerHRP = callerCharacter:FindFirstChild("HumanoidRootPart")
          local executorHRP = executorCharacter:FindFirstChild("HumanoidRootPart")
          if callerHRP and executorHRP then
-            executorHRP.CFrame = callerHRP.CFrame * CFrame.new(0,1.2,0)
+            --executorHRP.CFrame = callerHRP.CFrame * CFrame.new(0,1.2,0)
+			game.Players.LocalPlayer.Character.Animate.Disabled = true
+			game.Players.LocalPlayer.Character.Humanoid.HipHeight = 0
+			repeat task.wait() until game.Players.LocalPlayer:GetAttribute("LastACPos") == nil
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = executorHRP.CFrame = callerHRP.CFrame * CFrame.new(0,1.2,0)
+			task.wait(0.06)
+			game.Players.LocalPlayer.Character.Humanoid.HipHeight = 2.331695556640625
+			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = executorHRP.CFrame = callerHRP.CFrame * CFrame.new(0,1.2,0)
+			game.Players.LocalPlayer.Character.Animate.Disabled = false
          else
              --warn("HumanoidRootPart is missing for caller or executor.")
          end
