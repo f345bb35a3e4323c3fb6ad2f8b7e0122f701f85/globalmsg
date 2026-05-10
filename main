@@ -8,6 +8,7 @@ local TweenService = cloneref(game:GetService('TweenService'));
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = cloneref(LocalPlayer:GetMouse());
+local Version = 0.0.0;
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 
@@ -4481,7 +4482,7 @@ Library:AddToRegistry(WindowLabel, {
 local GameNameLabel = Library:CreateLabel({
     Position = UDim2.new(1, -210, 0, 0);
     Size = UDim2.new(0, 200, 0, 25);
-    Text = "THA BRONX 3";
+    Text = "THA BRONX 3 | v" .. Version;
     TextXAlignment = Enum.TextXAlignment.Right;
     TextSize = 16;
     ZIndex = 1;
