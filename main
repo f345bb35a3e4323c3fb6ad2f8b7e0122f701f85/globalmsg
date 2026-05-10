@@ -4490,7 +4490,7 @@ local GameNameLabel = Library:CreateLabel({
 
 Library:RemoveFromRegistry(GameNameLabel);
 GameNameLabel.TextColor3 = Color3.new(0, 255, 0);
---Library:AddToRegistry(GameNameLabel, { TextColor3 = 'RiskColor' });
+Library:AddToRegistry(GameNameLabel, { TextColor3 = 'RiskColor' });
 
 local AnimatedTitle = {
     Enabled = true,
