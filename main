@@ -2190,67 +2190,105 @@ function Button:AddButton(...)
     end;
 
     function Funcs:AddDivider(Text)
-        local Groupbox = self;
-        local Container = self.Container;
+        local Groupbox = self
+        local Container = self.Container
     
-        local Divider = {
-            Type = 'Divider',
-        }
+        Text = Text or ""
     
-        Text = Text or "";
+        Groupbox:AddBlank(2)
     
-        Groupbox:AddBlank(2);
-    
-        local DividerOuter = Library:Create('Frame', {
-            BackgroundColor3 = Color3.new(0, 0, 0);
-            BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -4, 0, Text ~= "" and 16 or 5);
-            ZIndex = 5;
+        local Holder = Library:Create("Frame", {
+            BackgroundTransparency = 1;
+            Size = UDim2.new(1, -4, 0, 12);
             Parent = Container;
-        });
+        })
     
-        local DividerInner = Library:Create('Frame', {
-            BackgroundColor3 = Library.MainColor;
-            BorderColor3 = Library.OutlineColor;
-            BorderMode = Enum.BorderMode.Inset;
-            Size = UDim2.new(1, 0, 1, 0);
-            ZIndex = 6;
-            Parent = DividerOuter;
-        });
+        if Text == "" then
+            local DividerOuter = Library:Create("Frame", {
+                BackgroundColor3 = Color3.new(0, 0, 0);
+                BorderColor3 = Color3.new(0, 0, 0);
+                Size = UDim2.new(1, 0, 0, 5);
+                Position = UDim2.new(0, 0, 0, 3);
+                Parent = Holder;
+            })
     
-        if Text ~= "" then
-            local DividerLabel = Library:Create('TextLabel', {
-                BackgroundTransparency = 1;
+            local DividerInner = Library:Create("Frame", {
+                BackgroundColor3 = Library.MainColor;
+                BorderColor3 = Library.OutlineColor;
+                BorderMode = Enum.BorderMode.Inset;
                 Size = UDim2.new(1, 0, 1, 0);
-                Position = UDim2.new(0, 0, 0, 0);
-                Font = Enum.Font.Code;
-                Text = Text;
-                TextColor3 = Library.FontColor;
-                TextSize = Library.TextSize;
-                TextXAlignment = Enum.TextXAlignment.Center;
-                TextYAlignment = Enum.TextYAlignment.Center;
-                ZIndex = 7;
-                Parent = DividerInner;
-            });
+                Parent = DividerOuter;
+            })
     
-            Library:AddToRegistry(DividerLabel, {
-                TextColor3 = 'FontColor';
-            });
+            Library:AddToRegistry(DividerOuter, { BorderColor3 = "Black" })
+            Library:AddToRegistry(DividerInner, {
+                BackgroundColor3 = "MainColor",
+                BorderColor3 = "OutlineColor"
+            })
+        else
+            local TextBounds = game:GetService("TextService"):GetTextSize(
+                Text,
+                Library.TextSize,
+                Enum.Font.Code,
+                Vector2.new(math.huge, math.huge)
+            )
+    
+            local Gap = TextBounds.X + 12
+            local HalfGap = Gap / 2
+    
+            local Left = Library:Create("Frame", {
+                BackgroundColor3 = Color3.new(0,0,0);
+                BorderColor3 = Color3.new(0,0,0);
+                Size = UDim2.new(0.5, -HalfGap, 0, 5);
+                Position = UDim2.new(0, 0, 0, 3);
+                Parent = Holder;
+            })
+    
+            local Right = Library:Create("Frame", {
+                BackgroundColor3 = Color3.new(0,0,0);
+                BorderColor3 = Color3.new(0,0,0);
+                Size = UDim2.new(0.5, -HalfGap, 0, 5);
+                Position = UDim2.new(0.5, HalfGap, 0, 3);
+                Parent = Holder;
+            })
+    
+            for _, Frame in next, {Left, Right} do
+                local Inner = Library:Create("Frame", {
+                    BackgroundColor3 = Library.MainColor;
+                    BorderColor3 = Library.OutlineColor;
+                    BorderMode = Enum.BorderMode.Inset;
+                    Size = UDim2.new(1,0,1,0);
+                    Parent = Frame;
+                })
+    
+                Library:AddToRegistry(Frame, {
+                    BorderColor3 = "Black"
+                })
+    
+                Library:AddToRegistry(Inner, {
+                    BackgroundColor3 = "MainColor",
+                    BorderColor3 = "OutlineColor"
+                })
+            end
+    
+            local Label = Library:Create("TextLabel", {
+                BackgroundTransparency = 1;
+                Text = Text;
+                Font = Enum.Font.Code;
+                TextSize = Library.TextSize;
+                TextColor3 = Library.FontColor;
+                Size = UDim2.new(0, TextBounds.X + 4, 1, 0);
+                Position = UDim2.new(0.5, -(TextBounds.X + 4)/2, 0, -1);
+                Parent = Holder;
+            })
+    
+            Library:AddToRegistry(Label, {
+                TextColor3 = "FontColor"
+            })
         end
     
-        Library:AddToRegistry(DividerOuter, {
-            BorderColor3 = 'Black';
-        });
-    
-        Library:AddToRegistry(DividerInner, {
-            BackgroundColor3 = 'MainColor';
-            BorderColor3 = 'OutlineColor';
-        });
-    
-        Groupbox:AddBlank(Text ~= "" and 9 or 9);
-        Groupbox:Resize();
-    
-        return Divider;
+        Groupbox:AddBlank(6)
+        Groupbox:Resize()
     end
 
     function Funcs:AddInput(Idx, Info)
