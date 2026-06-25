@@ -2189,23 +2189,26 @@ function Button:AddButton(...)
         return Button;
     end;
 
-    function Funcs:AddDivider()
+    function Funcs:AddDivider(Text)
         local Groupbox = self;
-        local Container = self.Container
-
+        local Container = self.Container;
+    
         local Divider = {
             Type = 'Divider',
         }
-
+    
+        Text = Text or "";
+    
         Groupbox:AddBlank(2);
+    
         local DividerOuter = Library:Create('Frame', {
             BackgroundColor3 = Color3.new(0, 0, 0);
             BorderColor3 = Color3.new(0, 0, 0);
-            Size = UDim2.new(1, -4, 0, 5);
+            Size = UDim2.new(1, -4, 0, Text ~= "" and 16 or 5);
             ZIndex = 5;
             Parent = Container;
         });
-
+    
         local DividerInner = Library:Create('Frame', {
             BackgroundColor3 = Library.MainColor;
             BorderColor3 = Library.OutlineColor;
@@ -2214,18 +2217,40 @@ function Button:AddButton(...)
             ZIndex = 6;
             Parent = DividerOuter;
         });
-
+    
+        if Text ~= "" then
+            local DividerLabel = Library:Create('TextLabel', {
+                BackgroundTransparency = 1;
+                Size = UDim2.new(1, 0, 1, 0);
+                Position = UDim2.new(0, 0, 0, 0);
+                Font = Enum.Font.Code;
+                Text = Text;
+                TextColor3 = Library.FontColor;
+                TextSize = Library.TextSize;
+                TextXAlignment = Enum.TextXAlignment.Center;
+                TextYAlignment = Enum.TextYAlignment.Center;
+                ZIndex = 7;
+                Parent = DividerInner;
+            });
+    
+            Library:AddToRegistry(DividerLabel, {
+                TextColor3 = 'FontColor';
+            });
+        end
+    
         Library:AddToRegistry(DividerOuter, {
             BorderColor3 = 'Black';
         });
-
+    
         Library:AddToRegistry(DividerInner, {
             BackgroundColor3 = 'MainColor';
             BorderColor3 = 'OutlineColor';
         });
-
-        Groupbox:AddBlank(9);
+    
+        Groupbox:AddBlank(Text ~= "" and 9 or 9);
         Groupbox:Resize();
+    
+        return Divider;
     end
 
     function Funcs:AddInput(Idx, Info)
