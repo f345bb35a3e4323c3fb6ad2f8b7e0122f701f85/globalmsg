@@ -2530,17 +2530,29 @@ end;
         end;
 
         ToggleRegion.InputBegan:Connect(function(Input)
+            if Toggle.Disabled then
+                return
+            end
+        
             if Input.UserInputType == Enum.UserInputType.MouseButton1 and not Library:MouseIsOverOpenedFrame() then
-                Toggle:SetValue(not Toggle.Value) -- Why was it not like this from the start?
-                Library:AttemptSave();
-            end;
+                Toggle:SetValue(not Toggle.Value)
+                Library:AttemptSave()
+            end
         end);
+
 
         if Toggle.Risky then
             Library:RemoveFromRegistry(ToggleLabel)
             ToggleLabel.TextColor3 = Library.RiskColor
             Library:AddToRegistry(ToggleLabel, { TextColor3 = 'RiskColor' })
         end
+
+        if Toggle.Disabled then
+            Library:RemoveFromRegistry(ToggleLabel)
+            ToggleLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
+            Library:AddToRegistry(ToggleLabel, { TextColor3 = Color3.fromRGB(150, 150, 150) })
+        end
+
 
         Toggle:Display();
         Groupbox:AddBlank(Info.BlankSize or 5 + 2);
