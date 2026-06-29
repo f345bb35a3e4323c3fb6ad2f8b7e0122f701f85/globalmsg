@@ -2423,6 +2423,7 @@ function Button:AddButton(...)
             Callback = Info.Callback or function(Value) end;
             Addons = {},
             Risky = Info.Risky,
+            Disabled = Info.Disabled,
         };
 
         local Groupbox = self;
