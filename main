@@ -2424,6 +2424,7 @@ function Button:AddButton(...)
             Addons = {},
             Risky = Info.Risky,
             Disabled = Info.Disabled,
+            Detected = Info.Detected
         };
 
         local Groupbox = self;
@@ -2552,6 +2553,15 @@ end;
             Library:RemoveFromRegistry(ToggleLabel)
             ToggleLabel.TextColor3 = Color3.fromRGB(150, 150, 150)
             Library:AddToRegistry(ToggleLabel, { TextColor3 = Color3.fromRGB(150, 150, 150) })
+        end
+
+        if Toggle.Detected then
+            Library:RemoveFromRegistry(ToggleLabel)
+            ToggleLabel.Text = "⚠️ " .. Info.Text
+            ToggleLabel.TextColor3 = Color3.fromRGB(255, 220, 0)
+            Library:AddToRegistry(ToggleLabel, {
+                TextColor3 = Color3.fromRGB(255, 220, 0)
+            })
         end
 
 
