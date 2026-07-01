@@ -4504,7 +4504,7 @@ Library:AddToRegistry(WindowLabel, {
 local GameNameLabel = Library:CreateLabel({
     Position = UDim2.new(1, -210, 0, 0);
     Size = UDim2.new(0, 200, 0, 25);
-    Text = "THA BRONX 3";
+    Text = (not LPH_OBFUSCATED and "Developer") or (LPH_OBFUSCATED and "Paid") or "Free";
     TextXAlignment = Enum.TextXAlignment.Right;
     TextSize = 16;
     ZIndex = 1;
